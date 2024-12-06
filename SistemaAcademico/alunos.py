@@ -23,12 +23,12 @@ def cadastrar_aluno():
         "Digite o email:",
     ]
     
-    respostas = [input (campo).strip() for compo in campos]
+    respostas = [input(campo).strip() for campo in campos]
     
     aluno = {
         "nome": respostas[0],
         "matricula": matricula, 
-        "data_nascimente": respostas[1],
+        "data_nascimento": respostas[1],
         "sexo": respostas[2],
         "endereço": respostas[3],
         "telefone": respostas[4],
@@ -36,4 +36,4 @@ def cadastrar_aluno():
     }
     
     alunos.append(aluno)
-    print(f"Aluno {aluno['nome']} cadastrado com sucersso!\n")
+    print(f"Aluno {aluno['nome']} cadastrado com sucesso!\n")
