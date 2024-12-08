@@ -12,7 +12,6 @@ def gerar_matricula():
 
 def cadastrar_aluno():
     matricula = gerar_matricula()
-    print(f"Número de matrícula gerado: {matricula}")
     
     campos = [
         "Digite o nome do aluno:",
