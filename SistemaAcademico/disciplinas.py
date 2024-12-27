@@ -60,4 +60,3 @@ def excluir_disciplina():
         print(f"Disciplina com código {codigo} excluída com sucesso!\n")
     else:
         print(f"Disciplina com código {codigo} não encontrada.\n")
-

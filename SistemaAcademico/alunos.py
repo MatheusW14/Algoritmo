@@ -57,3 +57,4 @@ def excluir_aluno():
         print(f"Aluno com matrícula {matricula} excluído com sucesso!\n")
     else:
         print(f"Aluno com matrícula {matricula} não encontrado.\n")
+

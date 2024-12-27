@@ -1,40 +1,31 @@
-import pickle
 import os
+import pickle
+from alunos import alunos
+from professores import professores
+from disciplinas import disciplinas
+# from turmas import turmas
+
+# Caminho absoluto para o arquivo 'dados.pickle' no mesmo diretório do script
+caminho_arquivo = os.path.join(os.path.dirname(__file__), 'dados.pickle')
 
 # Função para carregar os dados
 def carregar_dados():
-    # Pega o diretório do script atual e cria o caminho para o arquivo
-    caminho_arquivo = os.path.join(os.path.dirname(__file__), 'dados.pickle')
     try:
         with open(caminho_arquivo, 'rb') as f:
-            alunos = pickle.load(f)
-            professores = pickle.load(f)
-            disciplinas = pickle.load(f)
-            turmas = pickle.load(f)
+            alunos[:] = pickle.load(f)  # Atualiza a lista de alunos
+            professores[:] = pickle.load(f)
+            disciplinas[:] = pickle.load(f)
+            # turmas[:] = pickle.load(f)  # Descomente quando a lista de turmas for usada
         print("Dados carregados com sucesso!")
     except FileNotFoundError:
-        alunos = []
-        professores = []
-        disciplinas = []
-        turmas = []
         print("Nenhum dado encontrado. Iniciando com listas vazias.")
-    return alunos, professores, disciplinas, turmas
 
 # Função para salvar os dados
-def salvar_dados(alunos, professores, disciplinas, turmas):
-    # Pega o diretório do script atual e cria o caminho para o arquivo
-    caminho_arquivo = os.path.join(os.path.dirname(__file__), 'dados.pickle')
-    
-     # Verifica se os dados estão sendo passados corretamente
-    print("Salvando dados...")
-    print("Alunos:", alunos)
-    print("Professores:", professores)
-    print("Disciplinas:", disciplinas)
-    print("Turmas:", turmas)
-
+def salvar_dados():
     with open(caminho_arquivo, 'wb') as f:
+        # Salva as listas no arquivo pickle
         pickle.dump(alunos, f)
         pickle.dump(professores, f)
         pickle.dump(disciplinas, f)
-        pickle.dump(turmas, f)
+        # pickle.dump(turmas, f)  # Descomente quando a lista de turmas for usada
     print("Dados salvos com sucesso!")

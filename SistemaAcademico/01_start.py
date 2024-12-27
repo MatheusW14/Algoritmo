@@ -3,9 +3,10 @@ from professores import cadastrar_professores, listar_professores, excluir_profe
 from disciplinas import cadastrar_disciplina, listar_disciplinas, excluir_disciplina
 from dados import carregar_dados, salvar_dados
 
-alunos, professores, disciplinas, turmas = carregar_dados()
-
 def menu():
+    
+    carregar_dados()
+    
     while True:
         print("01. Cadastrar Aluno")
         print("02. Cadastrar Professor")
@@ -38,7 +39,7 @@ def menu():
         elif opcao == "9":
             excluir_disciplina()
         elif opcao == "10":
-            salvar_dados(alunos, professores, disciplinas, turmas)
+            salvar_dados()
             print("Sistema encerrado.")
             break
         else:

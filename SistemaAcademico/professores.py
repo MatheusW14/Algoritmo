@@ -57,3 +57,4 @@ def excluir_professor():
         print(f"Professor com ID {professor_id} excluído com sucesso!\n")
     else:
         print(f"Professor com ID {professor_id} não encontrado.\n")
+
