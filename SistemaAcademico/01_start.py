@@ -1,6 +1,6 @@
-from alunos import cadastrar_aluno, listar_alunos
-from professores import cadastrar_professores, listar_professores
-from disciplinas import cadastrar_disciplina, listar_disciplinas
+from alunos import cadastrar_aluno, listar_alunos, excluir_aluno
+from professores import cadastrar_professores, listar_professores, excluir_professor
+from disciplinas import cadastrar_disciplina, listar_disciplinas, excluir_disciplina
 
 while True:
     print("1. Cadastrar Aluno")
@@ -9,7 +9,10 @@ while True:
     print("4. Listar Professores")
     print("5. Listar Alunos")
     print("6. Listar Disciplinas")
-    print("7. Sair")
+    print("7. Excluir Aluno")
+    print("8. Excluir Professor")
+    print("9. Excluir Disciplina")
+    print("10. Sair")
     opcao = input("Escolha uma opção: ").strip()
     
     if opcao == "1":
@@ -24,6 +27,12 @@ while True:
         listar_alunos()
     elif opcao == "6":
         listar_disciplinas()
+    elif opcao == "7":
+        excluir_aluno()
+    elif opcao == "8":
+        excluir_professor()
+    elif opcao == "9":
+        excluir_disciplina()
     elif opcao == "7":
         print("Encerrando o sistema...")
         break
