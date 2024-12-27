@@ -1,9 +1,11 @@
 import pickle
+import os
 
 # Função para carregar os dados
 def carregar_dados():
+    caminho_arquivo = os.path.join(os.getcwd(), 'dados.pickle')  # Obtém o caminho completo
     try:
-        with open('dados.pickle', 'rb') as f:
+        with open(caminho_arquivo, 'rb') as f:
             alunos = pickle.load(f)
             professores = pickle.load(f)
             disciplinas = pickle.load(f)
@@ -19,7 +21,8 @@ def carregar_dados():
 
 # Função para salvar os dados
 def salvar_dados(alunos, professores, disciplinas, turmas):
-    with open('dados.pickle', 'wb') as f:
+    caminho_arquivo = os.path.join(os.getcwd(), 'dados.pickle')  # Obtém o caminho completo
+    with open(caminho_arquivo, 'wb') as f:
         pickle.dump(alunos, f)
         pickle.dump(professores, f)
         pickle.dump(disciplinas, f)
