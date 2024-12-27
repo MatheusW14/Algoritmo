@@ -47,3 +47,13 @@ def listar_professores():
         for professor in professores:
             print(f"ID: {professor['id_professor']}, Nome: {professor['nome']}, Disciplinas: {', '.join(professor['disciplinas'])}")
     print("\n")
+    
+def excluir_professor():
+    professor_id = input("Digite o ID do professor para excluir: ").strip()
+    professor = next((p for p in professores if p['id_professor'] == professor_id), None)
+    
+    if professor:
+        professores.remove(professor)
+        print(f"Professor com ID {professor_id} excluído com sucesso!\n")
+    else:
+        print(f"Professor com ID {professor_id} não encontrado.\n")

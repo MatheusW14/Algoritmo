@@ -16,7 +16,7 @@ def cadastrar_aluno():
     campos = [
         "Digite o nome do aluno:",
         "Digite a data de nascimento (DD/MM/AAAA):",
-        "Digite o sexo (M/F)",
+        "Digite o sexo (M/F):",
         "Digite o endereço:",
         "Digite o telefone (apenas números):",
         "Digite o email:",
@@ -46,3 +46,14 @@ def listar_alunos():
         for aluno in alunos:
             print(f"Matrícula: {aluno['matricula']}, Nome: {aluno['nome']}, Email: {aluno['email']}")
     print("\n")
+
+# Função para excluir um aluno com base na matrícula
+def excluir_aluno():
+    matricula = input("Digite a matrícula do aluno para excluir: ").strip()
+    aluno = next((a for a in alunos if a['matricula'] == matricula), None)
+    
+    if aluno:
+        alunos.remove(aluno)
+        print(f"Aluno com matrícula {matricula} excluído com sucesso!\n")
+    else:
+        print(f"Aluno com matrícula {matricula} não encontrado.\n")

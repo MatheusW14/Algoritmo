@@ -50,3 +50,14 @@ def listar_disciplinas():
                 f"Professor: {disciplina['professor']['nome']} (ID: {disciplina['professor']['id']})"
             )
     print("\n")
+    
+def excluir_disciplina():
+    codigo = input("Digite o código da disciplina para excluir: ").strip()
+    disciplina = next((d for d in disciplinas if d['codigo'] == codigo), None)
+    
+    if disciplina:
+        disciplinas.remove(disciplina)
+        print(f"Disciplina com código {codigo} excluída com sucesso!\n")
+    else:
+        print(f"Disciplina com código {codigo} não encontrada.\n")
+
