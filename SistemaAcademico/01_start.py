@@ -33,7 +33,7 @@ while True:
         excluir_professor()
     elif opcao == "9":
         excluir_disciplina()
-    elif opcao == "7":
+    elif opcao == "10":
         print("Encerrando o sistema...")
         break
     else:
