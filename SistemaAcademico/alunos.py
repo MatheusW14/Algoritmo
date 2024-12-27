@@ -36,8 +36,7 @@ def cadastrar_aluno():
     
     alunos.append(aluno)
     print(f"Aluno {aluno['nome']} cadastrado com sucesso!\n")
-    
-    pass 
+     
 
 def listar_alunos():
     if not alunos:
@@ -47,5 +46,3 @@ def listar_alunos():
         for aluno in alunos:
             print(f"Matrícula: {aluno['matricula']}, Nome: {aluno['nome']}, Email: {aluno['email']}")
     print("\n")
-   
-    pass
