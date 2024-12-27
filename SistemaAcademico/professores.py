@@ -38,3 +38,12 @@ def cadastrar_professores():
     }
     professores.append(professor)
     print(f"Professor {professor['nome']} cadastrado com sucesso!\n")
+    
+def listar_professores():
+    if not professores:
+        print("Nenhum professor cadastrado ainda.")
+    else:
+        print("\n=== Lista de Professores ===")
+        for professor in professores:
+            print(f"ID: {professor['id_professor']}, Nome: {professor['nome']}, Disciplinas: {', '.join(professor['disciplinas'])}")
+    print("\n")

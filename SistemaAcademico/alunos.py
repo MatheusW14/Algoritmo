@@ -29,10 +29,23 @@ def cadastrar_aluno():
         "matricula": matricula, 
         "data_nascimento": respostas[1],
         "sexo": respostas[2],
-        "endereço": respostas[3],
+        "endereco": respostas[3],
         "telefone": respostas[4],
         "email": respostas[5]
     }
     
     alunos.append(aluno)
     print(f"Aluno {aluno['nome']} cadastrado com sucesso!\n")
+    
+    pass 
+
+def listar_alunos():
+    if not alunos:
+        print("Nenhum aluno cadastrado ainda.")
+    else:
+        print("\n=== Lista de Alunos ===")
+        for aluno in alunos:
+            print(f"Matrícula: {aluno['matricula']}, Nome: {aluno['nome']}, Email: {aluno['email']}")
+    print("\n")
+   
+    pass
