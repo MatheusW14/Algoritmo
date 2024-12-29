@@ -101,4 +101,25 @@ def inserir_professor_em_disciplina():
 
     print(f"Professor {professor['nome']} alocado à disciplina '{disciplina['nome']}' (Código: {disciplina['codigo']}) com sucesso!")
 
+def consultar_professor_por_disciplina():
+    if not disciplinas:
+        print("Nenhuma disciplina cadastrada ainda.")
+        return
+    
+    print("\n=== Consultar Professor por Disciplina ===")
+    for i, disciplina in enumerate(disciplinas, start=1):
+        print(f"{i}. {disciplina['nome']} (Código: {disciplina['codigo']})")
+    
+    escolha = input("Escolha o número da disciplina para ver o professor: ").strip()
+    if not escolha.isdigit() or int(escolha) < 1 or int(escolha) > len(disciplinas):
+        print("Opção inválida. Consulta cancelada.")
+        return
+    
+    disciplina_selecionada = disciplinas[int(escolha) - 1]
+    
+    professor = disciplina_selecionada['professor']
+    
+    print(f"\nProfessor alocado para a disciplina '{disciplina_selecionada['nome']}':")
+    print(f"Nome: {professor['nome']}, ID: {professor['id']}")
+    print("\n")
 

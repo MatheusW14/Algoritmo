@@ -208,3 +208,24 @@ def consultar_alunos_por_turma():
         for aluno in turma_selecionada['alunos']:
             print(f"- {aluno['nome']} (Matrícula: {aluno['matricula']})")
     print("\n")
+
+def consultar_disciplinas_por_turma():
+    if not turmas:
+        print("Nenhuma turma cadastrada ainda.")
+        return
+    
+    print("\n=== Consultar Disciplinas por Turma ===")
+    for i, turma in enumerate(turmas, start=1):
+        print(f"{i}. {turma['nome']} (Código: {turma['codigo']})")
+    
+    escolha = input("Escolha o número da turma para ver as disciplinas alocadas: ").strip()
+    if not escolha.isdigit() or int(escolha) < 1 or int(escolha) > len(turmas):
+        print("Opção inválida. Consulta cancelada.")
+        return
+    
+    turma_selecionada = turmas[int(escolha) - 1]
+    
+    print(f"\nDisciplinas alocadas para a turma '{turma_selecionada['nome']}':")
+    for disciplina in turma_selecionada['disciplinas']:
+        print(f"- {disciplina['nome']} (Código: {disciplina['codigo']})")
+    print("\n")

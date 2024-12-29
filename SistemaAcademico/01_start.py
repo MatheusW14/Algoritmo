@@ -1,7 +1,7 @@
 from alunos import cadastrar_aluno, listar_alunos, excluir_aluno
 from professores import cadastrar_professores, listar_professores, excluir_professor, filtrar_professores_por_disciplina
-from disciplinas import cadastrar_disciplina, listar_disciplinas, excluir_disciplina, inserir_professor_em_disciplina
-from turmas import cadastrar_turma, listar_turmas, excluir_turma, matricular_aluno_em_turma, inserir_disciplinas_em_turma, consultar_alunos_por_turma
+from disciplinas import cadastrar_disciplina, listar_disciplinas, excluir_disciplina, inserir_professor_em_disciplina, consultar_professor_por_disciplina
+from turmas import cadastrar_turma, listar_turmas, excluir_turma, matricular_aluno_em_turma, inserir_disciplinas_em_turma, consultar_alunos_por_turma, consultar_disciplinas_por_turma
 from dados import carregar_dados, salvar_dados
 
 def menu():
@@ -13,20 +13,22 @@ def menu():
         print("02. Cadastrar Professor")
         print("03. Cadastrar Disciplinas")
         print("04. Cadastrar Turmas")
-        print("04. Inserir Professor em Disciplina")
-        print("04. Inserir Disciplinas em Turma")
-        print("05. Listar Professores")
-        print("06. Listar Alunos")
-        print("07. Listar Disciplinas")
-        print("08. Listar Turmas")
-        print("08. Matricular Aluno em Turma")
-        print("08. Filtrar Professores por Disciplina")
-        print("08. Consultar Alunos por Turma")
-        print("09. Excluir Aluno")
-        print("10. Excluir Professor")
-        print("11. Excluir Disciplina")
-        print("12. Excluir Turmas")
-        print("13. Sair")
+        print("05. Inserir Professor em Disciplina")
+        print("06. Inserir Disciplinas em Turma")
+        print("07. Listar Professores")
+        print("08. Listar Alunos")
+        print("09. Listar Disciplinas")
+        print("10. Listar Turmas")
+        print("11. Matricular Aluno em Turma")
+        print("12. Filtrar Professores por Disciplina")
+        print("13. Consultar Alunos por Turma")
+        print("14. Consultar Professor por Disciplina")
+        print("15. Consultar Disciplinas por Turma")
+        print("16. Excluir Aluno")
+        print("17. Excluir Professor")
+        print("18. Excluir Disciplina")
+        print("19. Excluir Turmas")
+        print("20. Sair")
         opcao = input("Escolha uma opção: ").strip()
         
         if opcao == "1":
@@ -37,33 +39,37 @@ def menu():
             cadastrar_disciplina()
         elif opcao == "4":
             cadastrar_turma()
-        elif opcao == "4":
-            inserir_professor_em_disciplina()
-        elif opcao == "4":
-            inserir_disciplinas_em_turma()
         elif opcao == "5":
-            listar_professores()
+            inserir_professor_em_disciplina()
         elif opcao == "6":
-            listar_alunos()
+            inserir_disciplinas_em_turma()
         elif opcao == "7":
-            listar_disciplinas()
+            listar_professores()
         elif opcao == "8":
-            listar_turmas()
-        elif opcao == "8":
-            matricular_aluno_em_turma()
-        elif opcao == "8":
-            filtrar_professores_por_disciplina()
-        elif opcao == "8":
-            consultar_alunos_por_turma()
+            listar_alunos()
         elif opcao == "9":
-            excluir_aluno()
+            listar_disciplinas()
         elif opcao == "10":
-            excluir_professor()
+            listar_turmas()
         elif opcao == "11":
-            excluir_disciplina()
+            matricular_aluno_em_turma()
         elif opcao == "12":
-            excluir_turma()
+            filtrar_professores_por_disciplina()
         elif opcao == "13":
+            consultar_alunos_por_turma()
+        elif opcao == "14":
+            consultar_professor_por_disciplina()
+        elif opcao == "15":
+            consultar_disciplinas_por_turma()
+        elif opcao == "16":
+            excluir_aluno()
+        elif opcao == "17":
+            excluir_professor()
+        elif opcao == "18":
+            excluir_disciplina()
+        elif opcao == "19":
+            excluir_turma()
+        elif opcao == "20":
             salvar_dados()
             print("Sistema encerrado.")
             break
