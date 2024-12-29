@@ -1,5 +1,6 @@
 import random
 import string 
+from utils import obter_entrada
 
 alunos = []
 
@@ -14,15 +15,18 @@ def cadastrar_aluno():
     matricula = gerar_matricula()
     
     campos = [
-        "Digite o nome do aluno:",
-        "Digite a data de nascimento (DD/MM/AAAA):",
-        "Digite o sexo (M/F):",
-        "Digite o endereço:",
-        "Digite o telefone (apenas números):",
-        "Digite o email:",
+        ("Digite o nome do aluno:", str),
+        ("Digite a data de nascimento (DD/MM/AAAA):", lambda x: len(x) == 10 and x[2] == '/' and x[5] == '/'),
+        ("Digite o sexo (M/F):", lambda x: x in ['M', 'F']),
+        ("Digite o endereço:", str),
+        ("Digite o telefone (apenas números):", lambda x: x.isdigit()),
+        ("Digite o email:", str),
     ]
     
-    respostas = [input(campo).strip() for campo in campos]
+    respostas = []
+    for campo, tipo in campos:
+        resposta = obter_entrada(campo, validacao=tipo)
+        respostas.append(resposta)
     
     aluno = {
         "nome": respostas[0],

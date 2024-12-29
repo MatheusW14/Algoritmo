@@ -1,43 +1,42 @@
 import random
 import string 
+from utils import obter_entrada
 
 professores = []
 
 def gerar_matricula():
     numero = random.randint(10000, 99999)
-    letra = random.choice(string.ascii_uppercase) # random.choice() escolhe um único elemento aleatório de uma sequência (lista, tupla, string, etc.).
+    letra = random.choice(string.ascii_uppercase) 
     matricula = f"{numero:05}{letra}"
     return matricula
 
 def cadastrar_professores():
     id_professor = gerar_matricula()
     
-    campos = [
-        "Digite o nome do professor:",
-        "Digite a data de nascimento:",
-        "Digite o sexo(M/F):",
-        "Digite o endereço:",
-        "Digite o telefone(apenas números):",
-        "Digite o email:"
-        "Digite as diciplinas leciondas (separadas por vírgulas):"
-    ]
+    nome = obter_entrada("Digite o nome do professor: ")
+    data_nascimento = obter_entrada("Digite a data de nascimento (DD/MM/AAAA): ", validacao=lambda x: len(x) == 10 and x[2] == '/' and x[5] == '/')
+    sexo = obter_entrada("Digite o sexo (M/F): ", validacao=lambda x: x in ['M', 'F'], erro="Sexo deve ser 'M' ou 'F'. Tente novamente.")
+    endereco = obter_entrada("Digite o endereço: ")
+    telefone = obter_entrada("Digite o telefone (apenas números): ", validacao=lambda x: x.isdigit(), erro="Telefone deve conter apenas números. Tente novamente.")
+    email = obter_entrada("Digite o email: ")
     
-    respostas = [input(campo).strip() for campo in campos]
-    
-    disciplinas = [disciplina.strip() for disciplina in respostas[6].split(",")]  # As disciplinas serão separadas por vírgulas e convertidas em uma lista
+    disciplinas = obter_entrada("Digite as disciplinas lecionadas (separadas por vírgulas): ").split(",")
     
     professor = {
-        "nome": respostas[0],
+        "nome": nome,
         "id_professor": id_professor,
-        "data_nascimento": respostas[1],
-        "sexo": respostas[2],
-        "endereco": respostas[3],
-        "telefone": respostas[4],
-        "email": respostas[5],
-        "disciplinas": disciplinas,
+        "data_nascimento": data_nascimento,
+        "sexo": sexo,
+        "endereco": endereco,
+        "telefone": telefone,
+        "email": email,
+        "disciplinas": [disciplina.strip() for disciplina in disciplinas],  # Limpa espaços extras
     }
+    
     professores.append(professor)
     print(f"Professor {professor['nome']} cadastrado com sucesso!\n")
+
+
     
 def listar_professores():
     if not professores:

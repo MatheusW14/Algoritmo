@@ -12,20 +12,23 @@ caminho_arquivo = os.path.join(os.path.dirname(__file__), 'dados.pickle')
 def carregar_dados():
     try:
         with open(caminho_arquivo, 'rb') as f:
-            alunos[:] = pickle.load(f)  # Atualiza a lista de alunos
-            professores[:] = pickle.load(f)
-            disciplinas[:] = pickle.load(f)
-            turmas[:] = pickle.load(f)  
+            dados = pickle.load(f)
+            if not isinstance(dados, list) or len(dados) != 4:
+                raise ValueError("Arquivo de dados corrompido ou formato inválido.")
+            alunos[:], professores[:], disciplinas[:], turmas[:] = dados
         print("Dados carregados com sucesso!")
     except FileNotFoundError:
         print("Nenhum dado encontrado. Iniciando com listas vazias.")
+    except (ValueError, EOFError) as e:
+        print(f"Erro ao carregar os dados: {e}. Iniciando com listas vazias.")
+
 
 # Função para salvar os dados
 def salvar_dados():
-    with open(caminho_arquivo, 'wb') as f:
-        # Salva as listas no arquivo pickle
-        pickle.dump(alunos, f)
-        pickle.dump(professores, f)
-        pickle.dump(disciplinas, f)
-        pickle.dump(turmas, f) 
-    print("Dados salvos com sucesso!")
+    try:
+        with open(caminho_arquivo, 'wb') as f:
+            pickle.dump([alunos, professores, disciplinas, turmas], f)
+        print("Dados salvos com sucesso!")
+    except (IOError, pickle.PickleError) as e:
+        print(f"Erro ao salvar os dados: {e}")
+
