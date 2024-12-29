@@ -184,3 +184,27 @@ def inserir_disciplinas_em_turma():
         print(f"Disciplina '{disciplina['nome']}' alocada à turma '{turma['nome']}' com sucesso!")
 
     print("\nFinalizado o processo de alocação de disciplinas na turma.")
+
+def consultar_alunos_por_turma():
+    if not turmas:
+        print("Nenhuma turma cadastrada ainda.")
+        return
+    
+    print("\n=== Consultar Alunos por Turma ===")
+    for i, turma in enumerate(turmas, start=1):
+        print(f"{i}. {turma['nome']} (Código: {turma['codigo']})")
+    
+    escolha = input("Escolha o número da turma para ver os alunos: ").strip()
+    if not escolha.isdigit() or int(escolha) < 1 or int(escolha) > len(turmas):
+        print("Opção inválida. Consulta cancelada.")
+        return
+    
+    turma_selecionada = turmas[int(escolha) - 1]
+    
+    if not turma_selecionada['alunos']:
+        print(f"A turma '{turma_selecionada['nome']}' não possui alunos matriculados.")
+    else:
+        print(f"\nAlunos matriculados na turma '{turma_selecionada['nome']}':")
+        for aluno in turma_selecionada['alunos']:
+            print(f"- {aluno['nome']} (Matrícula: {aluno['matricula']})")
+    print("\n")

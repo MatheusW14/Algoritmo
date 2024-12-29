@@ -57,3 +57,39 @@ def excluir_professor():
     else:
         print(f"Professor com ID {professor_id} não encontrado.\n")
 
+def filtrar_professores_por_disciplina():
+    if not professores:
+        print("Nenhum professor cadastrado no sistema.")
+        return
+
+    # Exibir lista de disciplinas disponíveis nos professores
+    disciplinas_cadastradas = set(
+        disciplina
+        for professor in professores
+        for disciplina in professor.get("disciplinas", [])
+    )
+
+    if not disciplinas_cadastradas:
+        print("Nenhuma disciplina encontrada nos professores cadastrados.")
+        return
+
+    print("\n=== Disciplinas Disponíveis ===")
+    for disciplina in sorted(disciplinas_cadastradas):
+        print(f"- {disciplina}")
+
+    # Solicitar ao usuário a disciplina para filtrar
+    disciplina_escolhida = input("\nDigite o nome da disciplina para filtrar: ").strip()
+
+    # Encontrar professores que ministram a disciplina escolhida
+    professores_filtrados = [
+        professor
+        for professor in professores
+        if disciplina_escolhida in professor.get("disciplinas", [])
+    ]
+
+    if not professores_filtrados:
+        print(f"Nenhum professor encontrado para a disciplina '{disciplina_escolhida}'.")
+    else:
+        print(f"\n=== Professores que ministram '{disciplina_escolhida}' ===")
+        for professor in professores_filtrados:
+            print(f"ID: {professor['id_professor']}, Nome: {professor['nome']}")
