@@ -1,13 +1,33 @@
 from alunos import cadastrar_aluno, listar_alunos, excluir_aluno
-from professores import cadastrar_professores, listar_professores, excluir_professor, filtrar_professores_por_disciplina
-from disciplinas import cadastrar_disciplina, listar_disciplinas, excluir_disciplina, inserir_professor_em_disciplina, consultar_professor_por_disciplina
-from turmas import cadastrar_turma, listar_turmas, excluir_turma, matricular_aluno_em_turma, inserir_disciplinas_em_turma, consultar_alunos_por_turma, consultar_disciplinas_por_turma
+from professores import (
+    cadastrar_professores,
+    listar_professores,
+    excluir_professor,
+    filtrar_professores_por_disciplina,
+)
+from disciplinas import (
+    cadastrar_disciplina,
+    listar_disciplinas,
+    excluir_disciplina,
+    inserir_professor_em_disciplina,
+    consultar_professor_por_disciplina,
+)
+from turmas import (
+    cadastrar_turma,
+    listar_turmas,
+    excluir_turma,
+    matricular_aluno_em_turma,
+    inserir_disciplinas_em_turma,
+    consultar_alunos_por_turma,
+    consultar_disciplinas_por_turma,
+)
 from dados import carregar_dados, salvar_dados
 
+
 def menu():
-    
+
     carregar_dados()
-    
+
     while True:
         print("01. Cadastrar Aluno")
         print("02. Cadastrar Professor")
@@ -30,24 +50,24 @@ def menu():
         print("19. Excluir Turmas")
         print("20. Sair")
         opcao = input("Escolha uma opção: ").strip()
-        
-        if opcao == "1":
+
+        if opcao == "01":
             cadastrar_aluno()
-        elif opcao == "2":
+        elif opcao == "02":
             cadastrar_professores()
-        elif opcao == "3":
+        elif opcao == "03":
             cadastrar_disciplina()
-        elif opcao == "4":
+        elif opcao == "04":
             cadastrar_turma()
-        elif opcao == "5":
+        elif opcao == "05":
             inserir_professor_em_disciplina()
-        elif opcao == "6":
+        elif opcao == "06":
             inserir_disciplinas_em_turma()
-        elif opcao == "7":
+        elif opcao == "07":
             listar_professores()
-        elif opcao == "8":
+        elif opcao == "08":
             listar_alunos()
-        elif opcao == "9":
+        elif opcao == "09":
             listar_disciplinas()
         elif opcao == "10":
             listar_turmas()
@@ -75,5 +95,6 @@ def menu():
             break
         else:
             print("Opção inválida! Tente novamente.\n")
-            
+
+
 menu()

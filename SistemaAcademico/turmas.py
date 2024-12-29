@@ -7,10 +7,16 @@ turmas = []
 
 
 def gerar_codigo_turma():
+    """
+    Gera um código único para a turma.
+    """
     return f"T-{random.randint(1000, 9999)}"
 
 
 def cadastrar_turma():
+    """
+    Cadastra uma nova turma no sistema.
+    """
     nome = input("Digite o nome da turma: ").strip()
     codigo = gerar_codigo_turma()
 
@@ -52,7 +58,7 @@ def cadastrar_turma():
 
     # Filtra apenas as matrículas válidas
     alunos_selecionados = [
-        aluno for aluno in alunos if aluno['matricula'] in matriculas
+        aluno for aluno in alunos if aluno["matricula"] in matriculas
     ]
     if not alunos_selecionados:
         print("Nenhuma matrícula válida foi inserida. Cadastro cancelado.")
@@ -68,7 +74,11 @@ def cadastrar_turma():
     turmas.append(turma)
     print(f"Turma '{nome}' cadastrada com sucesso!")
 
+
 def listar_turmas():
+    """
+    Lista todas as turmas cadastradas.
+    """
     if not turmas:
         print("Nenhuma turma cadastrada ainda.")
         return
@@ -82,7 +92,11 @@ def listar_turmas():
         )
     print("\n")
 
+
 def excluir_turma():
+    """
+    Exclui uma turma cadastrada.
+    """
     if not turmas:
         print("Nenhuma turma cadastrada ainda.")
         return
@@ -98,8 +112,12 @@ def excluir_turma():
         return
     turma_excluida = turmas.pop(escolha - 1)
     print(f"Turma '{turma_excluida['nome']}' excluída com sucesso!")
-    
+
+
 def matricular_aluno_em_turma():
+    """
+    Matricula um aluno em uma turma existente.
+    """
     if not turmas:
         print("Nenhuma turma cadastrada. Cadastro cancelado.")
         return
@@ -133,15 +151,21 @@ def matricular_aluno_em_turma():
     aluno_selecionado = alunos[escolha_aluno - 1]
 
     # Verificar se o aluno já está matriculado na turma
-    if aluno_selecionado in turma_selecionada['alunos']:
+    if aluno_selecionado in turma_selecionada["alunos"]:
         print(f"O aluno {aluno_selecionado['nome']} já está matriculado nesta turma.")
         return
 
     # Adicionar aluno à turma
-    turma_selecionada['alunos'].append(aluno_selecionado)
-    print(f"Aluno {aluno_selecionado['nome']} matriculado com sucesso na turma {turma_selecionada['nome']}!")
-    
+    turma_selecionada["alunos"].append(aluno_selecionado)
+    print(
+        f"Aluno {aluno_selecionado['nome']} matriculado com sucesso na turma {turma_selecionada['nome']}!"
+    )
+
+
 def inserir_disciplinas_em_turma():
+    """
+    Aloca disciplinas a uma turma específica.
+    """
     if not turmas:
         print("Nenhuma turma cadastrada. Operação cancelada.")
         return
@@ -155,7 +179,7 @@ def inserir_disciplinas_em_turma():
         print(f"Código: {turma['codigo']}, Nome: {turma['nome']}")
 
     codigo_turma = input("Digite o código da turma para alocar disciplinas: ").strip()
-    turma = next((t for t in turmas if t['codigo'] == codigo_turma), None)
+    turma = next((t for t in turmas if t["codigo"] == codigo_turma), None)
 
     if not turma:
         print("Turma não encontrada. Operação cancelada.")
@@ -164,16 +188,22 @@ def inserir_disciplinas_em_turma():
     print("\n=== Lista de Disciplinas ===")
     listar_disciplinas()
 
-    codigos_disciplinas = input(
-        "Digite os códigos das disciplinas para alocar (separados por vírgula): "
-    ).strip().split(",")
+    codigos_disciplinas = (
+        input("Digite os códigos das disciplinas para alocar (separados por vírgula): ")
+        .strip()
+        .split(",")
+    )
 
     for codigo_disciplina in codigos_disciplinas:
         codigo_disciplina = codigo_disciplina.strip()
-        disciplina = next((d for d in disciplinas if d['codigo'] == codigo_disciplina), None)
+        disciplina = next(
+            (d for d in disciplinas if d["codigo"] == codigo_disciplina), None
+        )
 
         if not disciplina:
-            print(f"Disciplina com código {codigo_disciplina} não encontrada. Ignorada.")
+            print(
+                f"Disciplina com código {codigo_disciplina} não encontrada. Ignorada."
+            )
             continue
 
         if disciplina in turma.get("disciplinas", []):
@@ -181,51 +211,63 @@ def inserir_disciplinas_em_turma():
             continue
 
         turma.setdefault("disciplinas", []).append(disciplina)
-        print(f"Disciplina '{disciplina['nome']}' alocada à turma '{turma['nome']}' com sucesso!")
+        print(
+            f"Disciplina '{disciplina['nome']}' alocada à turma '{turma['nome']}' com sucesso!"
+        )
 
     print("\nFinalizado o processo de alocação de disciplinas na turma.")
 
+
 def consultar_alunos_por_turma():
+    """
+    Consulta e exibe os alunos matriculados em uma turma específica.
+    """
     if not turmas:
         print("Nenhuma turma cadastrada ainda.")
         return
-    
+
     print("\n=== Consultar Alunos por Turma ===")
     for i, turma in enumerate(turmas, start=1):
         print(f"{i}. {turma['nome']} (Código: {turma['codigo']})")
-    
+
     escolha = input("Escolha o número da turma para ver os alunos: ").strip()
     if not escolha.isdigit() or int(escolha) < 1 or int(escolha) > len(turmas):
         print("Opção inválida. Consulta cancelada.")
         return
-    
+
     turma_selecionada = turmas[int(escolha) - 1]
-    
-    if not turma_selecionada['alunos']:
+
+    if not turma_selecionada["alunos"]:
         print(f"A turma '{turma_selecionada['nome']}' não possui alunos matriculados.")
     else:
         print(f"\nAlunos matriculados na turma '{turma_selecionada['nome']}':")
-        for aluno in turma_selecionada['alunos']:
+        for aluno in turma_selecionada["alunos"]:
             print(f"- {aluno['nome']} (Matrícula: {aluno['matricula']})")
     print("\n")
 
+
 def consultar_disciplinas_por_turma():
+    """
+    Consulta e exibe as disciplinas alocadas para uma turma específica.
+    """
     if not turmas:
         print("Nenhuma turma cadastrada ainda.")
         return
-    
+
     print("\n=== Consultar Disciplinas por Turma ===")
     for i, turma in enumerate(turmas, start=1):
         print(f"{i}. {turma['nome']} (Código: {turma['codigo']})")
-    
-    escolha = input("Escolha o número da turma para ver as disciplinas alocadas: ").strip()
+
+    escolha = input(
+        "Escolha o número da turma para ver as disciplinas alocadas: "
+    ).strip()
     if not escolha.isdigit() or int(escolha) < 1 or int(escolha) > len(turmas):
         print("Opção inválida. Consulta cancelada.")
         return
-    
+
     turma_selecionada = turmas[int(escolha) - 1]
-    
+
     print(f"\nDisciplinas alocadas para a turma '{turma_selecionada['nome']}':")
-    for disciplina in turma_selecionada['disciplinas']:
+    for disciplina in turma_selecionada["disciplinas"]:
         print(f"- {disciplina['nome']} (Código: {disciplina['codigo']})")
     print("\n")

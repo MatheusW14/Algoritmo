@@ -6,12 +6,16 @@ from disciplinas import disciplinas
 from turmas import turmas
 
 # Caminho absoluto para o arquivo 'dados.pickle' no mesmo diretório do script
-caminho_arquivo = os.path.join(os.path.dirname(__file__), 'dados.pickle')
+caminho_arquivo = os.path.join(os.path.dirname(__file__), "dados.pickle")
+
 
 # Função para carregar os dados
 def carregar_dados():
+    """
+    Função para carregar os dados de um arquivo pickle.
+    """
     try:
-        with open(caminho_arquivo, 'rb') as f:
+        with open(caminho_arquivo, "rb") as f:
             dados = pickle.load(f)
             if not isinstance(dados, list) or len(dados) != 4:
                 raise ValueError("Arquivo de dados corrompido ou formato inválido.")
@@ -25,10 +29,12 @@ def carregar_dados():
 
 # Função para salvar os dados
 def salvar_dados():
+    """
+    Função para salvar os dados em um arquivo pickle.
+    """
     try:
-        with open(caminho_arquivo, 'wb') as f:
+        with open(caminho_arquivo, "wb") as f:
             pickle.dump([alunos, professores, disciplinas, turmas], f)
         print("Dados salvos com sucesso!")
     except (IOError, pickle.PickleError) as e:
         print(f"Erro ao salvar os dados: {e}")
-
