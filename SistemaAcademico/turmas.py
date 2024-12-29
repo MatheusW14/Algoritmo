@@ -1,18 +1,16 @@
 import random
-import string
 from disciplinas import disciplinas
 from professores import professores
 from alunos import alunos
 
 turmas = []
 
-# Função para gerar um código aleatório
+
 def gerar_codigo_turma():
     return f"T-{random.randint(1000, 9999)}"
 
-# Função para criar uma nova turma
+
 def cadastrar_turma():
-    
     nome = input("Digite o nome da turma: ").strip()
     codigo = gerar_codigo_turma()
 
@@ -60,7 +58,6 @@ def cadastrar_turma():
         print("Nenhuma matrícula válida foi inserida. Cadastro cancelado.")
         return
 
-    # Cria a turma
     turma = {
         "nome": nome,
         "codigo": codigo,
@@ -71,7 +68,6 @@ def cadastrar_turma():
     turmas.append(turma)
     print(f"Turma '{nome}' cadastrada com sucesso!")
 
-# Função para listar as turmas
 def listar_turmas():
     if not turmas:
         print("Nenhuma turma cadastrada ainda.")
