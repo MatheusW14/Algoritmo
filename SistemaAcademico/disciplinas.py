@@ -18,8 +18,6 @@ def cadastrar_disciplina():
     
     professor_escolhido = input("Escolha o ID do professor que irá ministrar a disciplina: ").strip()
 
-    from professores import professores  
-
     professor = next((prof for prof in professores if prof['id_professor'] == professor_escolhido), None)
     
     if not professor:
@@ -68,7 +66,6 @@ def excluir_disciplina():
         print(f"Disciplina com código {codigo} não encontrada.\n")
         
 def inserir_professor_em_disciplina():
-  
     if not professores:
         print("Nenhum professor cadastrado. Cadastro cancelado.")
         return
@@ -78,27 +75,30 @@ def inserir_professor_em_disciplina():
         return
     
     listar_disciplinas()
+    codigo_disciplina = obter_entrada("Digite o código da disciplina para alocar o professor: ", 
+                                      lambda x: any(d['codigo'] == x for d in disciplinas),
+                                      "Disciplina não encontrada.")
     
-    codigo_disciplina = input("Digite o código da disciplina para alocar o professor: ").strip()
-    disciplina = next((d for d in disciplinas if d['codigo'] == codigo_disciplina), None)
+    disciplina = next(d for d in disciplinas if d['codigo'] == codigo_disciplina)
     
-    if not disciplina:
-        print("Disciplina não encontrada. Cadastro cancelado.")
-        return
-
     listar_professores()
-
-    professor_id = input("Digite o ID do professor para alocar: ").strip()
-    professor = next((p for p in professores if p['id_professor'] == professor_id), None)
-
-    if not professor:
-        print("Professor não encontrado. Cadastro cancelado.")
-        return
+    professor_id = obter_entrada("Digite o ID do professor para alocar: ", 
+                                 lambda x: any(p['id_professor'] == x for p in professores),
+                                 "Professor não encontrado.")
+    
+    professor = next(p for p in professores if p['id_professor'] == professor_id)
+    
+    if 'professor' in disciplina and disciplina['professor']:
+        confirmacao = input(f"Esta disciplina já tem um professor alocado ({disciplina['professor']['nome']}). Deseja substituí-lo? (S/N): ").strip().upper()
+        if confirmacao != 'S':
+            print("Operação cancelada.")
+            return
 
     disciplina['professor'] = {
         "id": professor["id_professor"],
         "nome": professor["nome"]
     }
 
-    print(f"Professor {professor['nome']} alocado à disciplina '{disciplina['nome']}' com sucesso!")
+    print(f"Professor {professor['nome']} alocado à disciplina '{disciplina['nome']}' (Código: {disciplina['codigo']}) com sucesso!")
+
 
