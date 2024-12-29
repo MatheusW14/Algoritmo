@@ -26,7 +26,7 @@ def cadastrar_aluno():
             "Digite a data de nascimento (DD/MM/AAAA):",
             lambda x: len(x) == 10 and x[2] == "/" and x[5] == "/",
         ),
-        ("Digite o sexo (M/F):", lambda x: x in ["M", "F"]),
+        ("Digite o sexo (M/F):", lambda x: x.lower() in ["m", "f"]),
         ("Digite o endereço:", str),
         ("Digite o telefone (apenas números):", lambda x: x.isdigit()),
         ("Digite o email:", str),

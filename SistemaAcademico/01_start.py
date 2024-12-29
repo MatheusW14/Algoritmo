@@ -1,3 +1,5 @@
+from rich.console import Console
+from rich.table import Table
 from alunos import cadastrar_aluno, listar_alunos, excluir_aluno
 from professores import (
     cadastrar_professores,
@@ -25,32 +27,44 @@ from dados import carregar_dados, salvar_dados
 
 
 def menu():
+    console = Console()
 
     carregar_dados()
 
     while True:
-        print("01. Cadastrar Aluno")
-        print("02. Cadastrar Professor")
-        print("03. Cadastrar Disciplinas")
-        print("04. Cadastrar Turmas")
-        print("05. Inserir Professor em Disciplina")
-        print("06. Inserir Disciplinas em Turma")
-        print("07. Listar Professores")
-        print("08. Listar Alunos")
-        print("09. Listar Disciplinas")
-        print("10. Listar Turmas")
-        print("11. Matricular Aluno em Turma")
-        print("12. Filtrar Professores por Disciplina")
-        print("13. Consultar Alunos por Turma")
-        print("14. Consultar Professor por Disciplina")
-        print("15. Consultar Disciplinas por Turma")
-        print("16. Excluir Aluno")
-        print("17. Excluir Professor")
-        print("18. Excluir Disciplina")
-        print("19. Excluir Turmas")
-        print("20. Sair")
+        # Criando uma tabela bonita para o menu
+        table = Table(title="Sistema de Gerenciamento Acadêmico")
+
+        table.add_column("Opção", style="cyan", justify="center")
+        table.add_column("Descrição", style="magenta")
+
+        # Adicionando as opções do menu
+        table.add_row("01", "Cadastrar Aluno")
+        table.add_row("02", "Cadastrar Professor")
+        table.add_row("03", "Cadastrar Disciplina")
+        table.add_row("04", "Cadastrar Turma")
+        table.add_row("05", "Inserir Professor em Disciplina")
+        table.add_row("06", "Inserir Disciplinas em Turma")
+        table.add_row("07", "Listar Professores")
+        table.add_row("08", "Listar Alunos")
+        table.add_row("09", "Listar Disciplinas")
+        table.add_row("10", "Listar Turmas")
+        table.add_row("11", "Matricular Aluno em Turma")
+        table.add_row("12", "Filtrar Professores por Disciplina")
+        table.add_row("13", "Consultar Alunos por Turma")
+        table.add_row("14", "Consultar Professor por Disciplina")
+        table.add_row("15", "Consultar Disciplinas por Turma")
+        table.add_row("16", "Excluir Aluno")
+        table.add_row("17", "Excluir Professor")
+        table.add_row("18", "Excluir Disciplina")
+        table.add_row("19", "Excluir Turmas")
+        table.add_row("20", "Sair")
+
+        console.print(table)  # Imprime a tabela de opções
+
         opcao = input("Escolha uma opção: ").strip()
 
+        # Condições para chamar a função de acordo com a escolha do usuário
         if opcao == "01":
             cadastrar_aluno()
         elif opcao == "02":
@@ -91,10 +105,10 @@ def menu():
             excluir_turma()
         elif opcao == "20":
             salvar_dados()
-            print("Sistema encerrado.")
+            console.print("Sistema encerrado.", style="bold red")
             break
         else:
-            print("Opção inválida! Tente novamente.\n")
+            console.print("Opção inválida! Tente novamente.", style="bold red")
 
 
 menu()
