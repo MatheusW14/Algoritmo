@@ -1,6 +1,7 @@
 from alunos import cadastrar_aluno, listar_alunos, excluir_aluno
 from professores import cadastrar_professores, listar_professores, excluir_professor
 from disciplinas import cadastrar_disciplina, listar_disciplinas, excluir_disciplina
+from turmas import cadastrar_turma, listar_turmas
 from dados import carregar_dados, salvar_dados
 
 def menu():
@@ -11,13 +12,15 @@ def menu():
         print("01. Cadastrar Aluno")
         print("02. Cadastrar Professor")
         print("03. Cadastrar Disciplinas")
-        print("04. Listar Professores")
-        print("05. Listar Alunos")
-        print("06. Listar Disciplinas")
-        print("07. Excluir Aluno")
-        print("08. Excluir Professor")
-        print("09. Excluir Disciplina")
-        print("10. Sair")
+        print("04. Cadastrar Turmas")
+        print("05. Listar Professores")
+        print("06. Listar Alunos")
+        print("07. Listar Disciplinas")
+        print("08. Listar Turmas")
+        print("09. Excluir Aluno")
+        print("10. Excluir Professor")
+        print("11. Excluir Disciplina")
+        print("12. Sair")
         opcao = input("Escolha uma opção: ").strip()
         
         if opcao == "1":
@@ -27,18 +30,22 @@ def menu():
         elif opcao == "3":
             cadastrar_disciplina()
         elif opcao == "4":
-            listar_professores()
+            cadastrar_turma()
         elif opcao == "5":
-            listar_alunos()
+            listar_professores()
         elif opcao == "6":
-            listar_disciplinas()
+            listar_alunos()
         elif opcao == "7":
-            excluir_aluno()
+            listar_disciplinas()
         elif opcao == "8":
-            excluir_professor()
+            listar_turmas()
         elif opcao == "9":
-            excluir_disciplina()
+            excluir_aluno()
         elif opcao == "10":
+            excluir_professor()
+        elif opcao == "11":
+            excluir_disciplina()
+        elif opcao == "12":
             salvar_dados()
             print("Sistema encerrado.")
             break
