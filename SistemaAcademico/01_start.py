@@ -1,7 +1,7 @@
 from alunos import cadastrar_aluno, listar_alunos, excluir_aluno
 from professores import cadastrar_professores, listar_professores, excluir_professor
 from disciplinas import cadastrar_disciplina, listar_disciplinas, excluir_disciplina, inserir_professor_em_disciplina
-from turmas import cadastrar_turma, listar_turmas, excluir_turma, matricular_aluno_em_turma
+from turmas import cadastrar_turma, listar_turmas, excluir_turma, matricular_aluno_em_turma, inserir_disciplinas_em_turma
 from dados import carregar_dados, salvar_dados
 
 def menu():
@@ -14,6 +14,7 @@ def menu():
         print("03. Cadastrar Disciplinas")
         print("04. Cadastrar Turmas")
         print("04. Inserir Professor em Disciplina")
+        print("04. Inserir Disciplinas em Turma")
         print("05. Listar Professores")
         print("06. Listar Alunos")
         print("07. Listar Disciplinas")
@@ -36,6 +37,8 @@ def menu():
             cadastrar_turma()
         elif opcao == "4":
             inserir_professor_em_disciplina()
+        elif opcao == "4":
+            inserir_disciplinas_em_turma()
         elif opcao == "5":
             listar_professores()
         elif opcao == "6":

@@ -1,5 +1,5 @@
 import random
-from disciplinas import disciplinas
+from disciplinas import listar_disciplinas, disciplinas
 from professores import professores
 from alunos import alunos
 
@@ -140,3 +140,47 @@ def matricular_aluno_em_turma():
     # Adicionar aluno à turma
     turma_selecionada['alunos'].append(aluno_selecionado)
     print(f"Aluno {aluno_selecionado['nome']} matriculado com sucesso na turma {turma_selecionada['nome']}!")
+    
+def inserir_disciplinas_em_turma():
+    if not turmas:
+        print("Nenhuma turma cadastrada. Operação cancelada.")
+        return
+
+    if not disciplinas:
+        print("Nenhuma disciplina cadastrada. Operação cancelada.")
+        return
+
+    print("\n=== Lista de Turmas ===")
+    for turma in turmas:
+        print(f"Código: {turma['codigo']}, Nome: {turma['nome']}")
+
+    codigo_turma = input("Digite o código da turma para alocar disciplinas: ").strip()
+    turma = next((t for t in turmas if t['codigo'] == codigo_turma), None)
+
+    if not turma:
+        print("Turma não encontrada. Operação cancelada.")
+        return
+
+    print("\n=== Lista de Disciplinas ===")
+    listar_disciplinas()
+
+    codigos_disciplinas = input(
+        "Digite os códigos das disciplinas para alocar (separados por vírgula): "
+    ).strip().split(",")
+
+    for codigo_disciplina in codigos_disciplinas:
+        codigo_disciplina = codigo_disciplina.strip()
+        disciplina = next((d for d in disciplinas if d['codigo'] == codigo_disciplina), None)
+
+        if not disciplina:
+            print(f"Disciplina com código {codigo_disciplina} não encontrada. Ignorada.")
+            continue
+
+        if disciplina in turma.get("disciplinas", []):
+            print(f"Disciplina '{disciplina['nome']}' já alocada na turma. Ignorada.")
+            continue
+
+        turma.setdefault("disciplinas", []).append(disciplina)
+        print(f"Disciplina '{disciplina['nome']}' alocada à turma '{turma['nome']}' com sucesso!")
+
+    print("\nFinalizado o processo de alocação de disciplinas na turma.")
