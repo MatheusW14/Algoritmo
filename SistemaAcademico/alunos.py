@@ -71,6 +71,16 @@ def excluir_aluno():
     """
     Exclui um aluno com base na matrícula fornecida pelo usuário.
     """
+    if not alunos:
+        print("Nenhum aluno cadastrado para exclusão.\n")
+        return
+
+    # Listar todos os alunos para facilitar a escolha
+    print("\n=== Lista de Alunos Cadastrados ===")
+    for aluno in alunos:
+        print(f"Matrícula: {aluno['matricula']}, Nome: {aluno['nome']}")
+    print()
+
     matricula = input("Digite a matrícula do aluno para excluir: ").strip()
     aluno = next((a for a in alunos if a["matricula"] == matricula), None)
 

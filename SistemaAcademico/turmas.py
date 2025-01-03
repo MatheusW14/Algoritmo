@@ -95,23 +95,26 @@ def listar_turmas():
 
 def excluir_turma():
     """
-    Exclui uma turma cadastrada.
+    Exclui uma turma com base no código fornecido pelo usuário.
     """
     if not turmas:
-        print("Nenhuma turma cadastrada ainda.")
+        print("Nenhuma turma cadastrada para exclusão.\n")
         return
-    print("\n=== Turmas Disponíveis ===")
-    for i, turma in enumerate(turmas, start=1):
-        print(f"{i}. {turma['nome']} (Código: {turma['codigo']})")
-    try:
-        escolha = int(input("Digite o número da turma a excluir: ").strip())
-        if escolha < 1 or escolha > len(turmas):
-            raise ValueError
-    except ValueError:
-        print("Opção inválida. Exclusão cancelada.")
-        return
-    turma_excluida = turmas.pop(escolha - 1)
-    print(f"Turma '{turma_excluida['nome']}' excluída com sucesso!")
+
+    # Listar todas as turmas
+    print("\n=== Lista de Turmas Cadastradas ===")
+    for turma in turmas:
+        print(f"Código: {turma['codigo']}, Nome: {turma['nome']}")
+    print()
+
+    codigo_turma = input("Digite o código da turma para excluir: ").strip()
+    turma = next((t for t in turmas if t["codigo"] == codigo_turma), None)
+
+    if turma:
+        turmas.remove(turma)
+        print(f"Turma com código {codigo_turma} excluída com sucesso!\n")
+    else:
+        print(f"Turma com código {codigo_turma} não encontrada.\n")
 
 
 def matricular_aluno_em_turma():

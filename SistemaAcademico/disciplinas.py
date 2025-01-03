@@ -73,26 +73,28 @@ def listar_disciplinas():
 
 def excluir_disciplina():
     """
-    Exclui uma disciplina do sistema com base no código fornecido pelo usuário.
+    Exclui uma disciplina com base no código fornecido pelo usuário.
     """
-    codigo = obter_entrada("Digite o código da disciplina para excluir: ")
-    disciplina = next((d for d in disciplinas if d["codigo"] == codigo), None)
+    if not disciplinas:
+        print("Nenhuma disciplina cadastrada para exclusão.\n")
+        return
+
+    # Listar todas as disciplinas
+    print("\n=== Lista de Disciplinas Cadastradas ===")
+    for disciplina in disciplinas:
+        print(f"Código: {disciplina['codigo']}, Nome: {disciplina['nome']}")
+    print()
+
+    codigo_disciplina = input("Digite o código da disciplina para excluir: ").strip()
+    disciplina = next(
+        (d for d in disciplinas if d["codigo"] == codigo_disciplina), None
+    )
 
     if disciplina:
-        confirmacao = (
-            input(
-                f"Tem certeza que deseja excluir a disciplina {disciplina['nome']}? (S/N): "
-            )
-            .strip()
-            .upper()
-        )
-        if confirmacao == "S":
-            disciplinas.remove(disciplina)
-            print(f"Disciplina com código {codigo} excluída com sucesso!\n")
-        else:
-            print("Operação cancelada.\n")
+        disciplinas.remove(disciplina)
+        print(f"Disciplina com código {codigo_disciplina} excluída com sucesso!\n")
     else:
-        print(f"Disciplina com código {codigo} não encontrada.\n")
+        print(f"Disciplina com código {codigo_disciplina} não encontrada.\n")
 
 
 def inserir_professor_em_disciplina():

@@ -80,18 +80,26 @@ def listar_professores():
 
 def excluir_professor():
     """
-    Exclui um professor do sistema com base no ID fornecido pelo usuário.
+    Exclui um professor com base no ID fornecido pelo usuário.
     """
-    professor_id = input("Digite o ID do professor para excluir: ").strip()
-    professor = next(
-        (p for p in professores if p["id_professor"] == professor_id), None
-    )
+    if not professores:
+        print("Nenhum professor cadastrado para exclusão.\n")
+        return
+
+    # Listar todos os professores
+    print("\n=== Lista de Professores Cadastrados ===")
+    for professor in professores:
+        print(f"ID: {professor['id']}, Nome: {professor['nome']}")
+    print()
+
+    id_professor = input("Digite o ID do professor para excluir: ").strip()
+    professor = next((p for p in professores if p["id"] == id_professor), None)
 
     if professor:
         professores.remove(professor)
-        print(f"Professor com ID {professor_id} excluído com sucesso!\n")
+        print(f"Professor com ID {id_professor} excluído com sucesso!\n")
     else:
-        print(f"Professor com ID {professor_id} não encontrado.\n")
+        print(f"Professor com ID {id_professor} não encontrado.\n")
 
 
 def filtrar_professores_por_disciplina():
