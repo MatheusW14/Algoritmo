@@ -34,12 +34,21 @@ console = Console()
 
 # Função de carregamento para simulação
 def animacao_carregamento(descricao="Processando..."):
+    """
+    Função para simular uma animação de carregamento.
+
+    Args:
+        descricao (str): Descrição a ser exibida durante o carregamento.
+    """
     for _ in track(range(10), description=descricao):
         time.sleep(0.1)
 
 
 # Função para limpar o console
 def limpar_console():
+    """
+    Função para limpar o console.
+    """
     os.system("cls" if os.name == "nt" else "clear")
 
 
