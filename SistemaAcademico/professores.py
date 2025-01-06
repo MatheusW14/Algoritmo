@@ -31,7 +31,7 @@ def cadastrar_professores():
     )
     sexo = obter_entrada(
         "Digite o sexo (M/F): ",
-        validacao=lambda x: x in ["M", "F"],
+        validacao=lambda x: x.lower() in ["M", "F"],
         erro="Sexo deve ser 'M' ou 'F'. Tente novamente.",
     )
     endereco = obter_entrada("Digite o endereço: ")
