@@ -6,6 +6,15 @@ alunos = []
 
 
 def gerar_matricula():
+    """
+    Gera uma matrícula aleatória para um aluno.
+
+    A matrícula é composta por um número de 4 dígitos (com zeros à esquerda, se necessário)
+    seguido por uma letra maiúscula aleatória.
+
+    Returns:
+        str: A matrícula gerada no formato 'NNNNL', onde 'NNNN' é um número de 4 dígitos e 'L' é uma letra maiúscula.
+    """
     numero = random.randint(1, 9999)
     letra = random.choice(
         string.ascii_uppercase
